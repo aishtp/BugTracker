@@ -1,0 +1,16 @@
+.bg {
+    background-color: #E5E4E2;
+}
+.ml-30{
+    margin-left: 30rem !important;
+}
+.mt-5r{
+    margin-top: 5rem !important;
+}
+.not-allowed{
+    cursor: not-allowed;
+}
+.btn-disable[disabled] {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}

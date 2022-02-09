@@ -1,0 +1,111 @@
+<nav class="navbar navbar-dark " style="background-color: #A9A9A9;">
+    <strong class="ms-2">List of issues</strong>
+    <button type="button" class="btn btn-default btn-sm float-end me-2" (click)="logOut();">
+        <i class="bi bi-box-arrow-right"></i><strong> Log out</strong>
+    </button>
+</nav>
+<div class="float-end">
+    <div class="btn-group">
+        <button type="button" class="btn btn-outline-secondary my-3" data-bs-toggle="modal" data-bs-target="#createIssueModal">Create Issue</button>
+        <button type="button" class="btn btn-outline-secondary ms-3 me-2 my-3">Export to Excel/CSV</button>
+    </div>
+</div>
+<div class="modal fade" id="createIssueModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createIssueModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createIssueModalLabel">Log an issue</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form #myForm="ngForm">
+                <div class="form-group mt-2">
+                  <label for="iname">Issue Name</label>
+                  <input type="text" class="form-control" id="iname" name="issueName" [(ngModel)]="issue.issueName"
+                    #issueName="ngModel" required>
+                </div>
+                  <div *ngIf="issueName.invalid && (issueName.dirty || issueName.touched)" class="alert">
+                    <div *ngIf="issueName.errors?.['required']" class="ml-30">
+                      Please enter Issuename
+                    </div>
+                  </div>
+                <div class="form-group mt-2">
+                  <label for="Desc">Description</label>
+                  <input type="text" class="form-control" id="Desc" name="desc" [(ngModel)]="issue.desc" #desc="ngModel" required>
+                </div>
+                <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="alert">
+                  <div *ngIf="desc.errors?.['required']" class="ml-30">
+                    Please enter Description
+                  </div>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="Impact">Impact</label>
+                  <input type="text" class="form-control" id="Impact" name="impact" [(ngModel)]="issue.impact" #impact="ngModel" required>
+                </div>
+                <div *ngIf="impact.invalid && (impact.dirty || impact.touched)" class="alert">
+                  <div *ngIf="impact.errors?.['required']" class="ml-30">
+                    Please enter Impact
+                  </div>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="Owner">Owner</label>
+                  <input type="text" class="form-control" id="Owner" name="owner" [(ngModel)]="issue.owner" #owner="ngModel" required>
+                </div>
+                <div *ngIf="owner.invalid && (owner.dirty || owner.touched)" class="alert">
+                  <div *ngIf="owner.errors?.['required']" class="ml-30">
+                    Please enter Owner
+                  </div>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="Action">Action</label>
+                  <input type="text" class="form-control" id="Action" name="action" [(ngModel)]="issue.action" #action="ngModel" required>
+                </div>
+                <div *ngIf="action.invalid && (action.dirty || action.touched)" class="alert">
+                  <div *ngIf="action.errors?.['required']" class="ml-30">
+                    Please enter Action
+                  </div>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="DueDate">Due Date</label>
+                  <input type="text" class="form-control" id="DueDate" name="dueDate" [(ngModel)]="issue.dueDate" #dueDate="ngModel" required>
+                </div>
+                <div *ngIf="dueDate.invalid && (dueDate.dirty || dueDate.touched)" class="alert">
+                  <div *ngIf="dueDate.errors?.['required']" class="ml-30">
+                    Please enter Due Date
+                  </div>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" [disabled]="!myForm.valid" (click)="onSubmit()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Issue Number</th>
+            <th scope="col">Issue Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Impact</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Action</th>
+            <th scope="col">Due Date</th>
+        </tr>
+    </thead>
+
+    <tbody >
+        <tr *ngFor="let item of data">
+            <th scope="row">{{ item.issueNumber}}</th>
+            <td>{{ item.issueName}}</td>
+            <td>{{ item.description}}</td>
+            <td>{{ item.impact}}</td>
+            <td>{{ item.owner}}</td>
+            <td>{{ item.action}}</td>
+            <td>{{ item.dueDate}}</td>
+        </tr>
+    </tbody>
+</table>
